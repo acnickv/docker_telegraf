@@ -11,6 +11,7 @@ COPY docker-entrypoint.sh /
 
 RUN tar xzf /telegraf-1.4.1_linux_armhf.tar.gz -C / && \
     mv /telegraf.conf /telegraf/etc/telegraf.conf && \
+    mkdir -p /telegraf/etc/telegraf.d && \
     adduser -u 901 -D -S telegraf && \
     chown -R telegraf: /telegraf && \
     chown -R telegraf: /docker-entrypoint.sh && \
@@ -23,4 +24,3 @@ USER telegraf
 ENTRYPOINT ["/docker-entrypoint.sh"]
 # ENTRYPOINT ["/influxdb/usr/bin/influxd"]
 # CMD ["run","-config","/influxdb/influxdb.conf","-pidfile","/var/run/influxdb.pid"]
-
